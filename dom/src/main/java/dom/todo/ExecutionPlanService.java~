@@ -1,0 +1,26 @@
+    public List<ExecutionPlan> getExecutionPlans(ToDoItem td) {
+        List<ExecutionPlan> l = new ArrayList<ExecutionPlan>();
+
+        for (int j = 0; j < 2; j++) {
+            ExecutionPlan tp = newTransientInstance(ExecutionPlan.class);
+            for (int i = 0; i < 2; i++) {
+                ShortLeg sl = newTransientInstance(ShortLeg.class);
+                sl.setFrom("from " + i + j);
+                sl.setTo("to " + i + j);
+                sl = persist(sl);
+                tp.addLeg(sl);
+            }
+            tp = persist(tp);
+            l.add(tp);
+        }
+
+        //return allInstances(ExecutionPlan.class);
+
+        //return l;
+
+        System.out.println("--------------------getExecutionPlans called again--------");
+        if ((l = allInstances(ExecutionPlan.class)) != null && l.size() > 0)
+            return l;
+        else
+            return getExecutionPlans(td.getPickup(), td.getDelivery());
+    }
