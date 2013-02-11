@@ -108,9 +108,9 @@ public class ToDoItem implements Comparable<ToDoItem> /*, Locatable*/ { // GMAP3
     public void setExecutionPlan(ExecutionPlan ep){
 	this.executionPlan = ep;
     }
-    public List<ExecutionPlan> choicesExecutionPlan(){
-	return eps.getExecutionPlans(this);
-    }
+//    public List<ExecutionPlan> choicesExecutionPlan(){
+//	return eps.getExecutionPlans(this);
+//    }
 
     // }}
 
@@ -377,6 +377,11 @@ public class ToDoItem implements Comparable<ToDoItem> /*, Locatable*/ { // GMAP3
 
     // }}
 
+    public ExecutionPlanChooser chooseExecutionPlan(){
+        ExecutionPlanChooser ec = container.newTransientInstance(ExecutionPlanChooser.class);
+        ec.setToDoItem(this);
+        return ec;
+    }
 
     // {{ SimilarItems (derived collection)
     @MemberOrder(sequence = "5")

@@ -1,6 +1,7 @@
 package dom.todo;
 
 import javax.jdo.annotations.IdentityType;
+import javax.jdo.annotations.VersionStrategy;
 
 
 /**
@@ -9,6 +10,7 @@ import javax.jdo.annotations.IdentityType;
  */
 @javax.jdo.annotations.PersistenceCapable(identityType = IdentityType.DATASTORE)
 @javax.jdo.annotations.DatastoreIdentity(strategy = javax.jdo.annotations.IdGeneratorStrategy.IDENTITY)
+@javax.jdo.annotations.Version(strategy=VersionStrategy.VERSION_NUMBER, column="VERSION")
 public class Task{
 
     private String what;

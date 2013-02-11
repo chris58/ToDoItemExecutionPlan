@@ -3,7 +3,9 @@ package dom.todo;
 import java.util.ArrayList;
 import java.util.List;
 import javax.jdo.annotations.IdentityType;
+import javax.jdo.annotations.VersionStrategy;
 import org.apache.isis.applib.annotation.Hidden;
+import org.apache.isis.applib.annotation.Title;
 
 /**
  *
@@ -12,9 +14,18 @@ import org.apache.isis.applib.annotation.Hidden;
 //@Hidden
 @javax.jdo.annotations.PersistenceCapable(identityType = IdentityType.DATASTORE)
 @javax.jdo.annotations.DatastoreIdentity(strategy = javax.jdo.annotations.IdGeneratorStrategy.IDENTITY)
+@javax.jdo.annotations.Version(strategy=VersionStrategy.VERSION_NUMBER, column="VERSION")
 public class ExecutionPlan {
     private String name;
-
+    private boolean inUse = false;
+    
+    public boolean isInUse(){
+        return inUse;
+    }
+    public void setInUse(boolean inUse){
+        this.inUse = inUse;
+    }
+    
     public ExecutionPlan(){
         System.out.println("Allocating new ExecutionPlan");
     }
